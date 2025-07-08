@@ -1,0 +1,1 @@
+Este sera el front de la aplicación donde nos pedirá los datos de conexión a una base de datos y nos analizara todo esto, nos lo mostrara todo este análisis para poder mejorar nuestras db sin necesidad de complicarnos mucho la vida

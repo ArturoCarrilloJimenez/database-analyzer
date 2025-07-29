@@ -1,1 +1,0 @@
-Este es el back que obtendrá todos los datos de la db que se conecte y le pasara estos a el servicio de FastApi

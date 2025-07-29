@@ -1,1 +1,0 @@
-Este servicio se encarga de analizar la info que le pasaran, la procesara, generara un prompt y lo pasara a llama para hacer un análisis reactivo de los problemas y mejoras de esta db

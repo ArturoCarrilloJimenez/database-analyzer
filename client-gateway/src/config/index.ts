@@ -1,2 +1,2 @@
 export { env } from './env';
-export { SERVICES } from './services';
+export { NATS_SERVICE } from './services';

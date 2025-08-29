@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  nats-transport:
+    image: nats:2.11.8
+    ports:
+      - "4222:4222"
+
+  api-gateway:
+    build: ./client-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NATS_SERVER=nats://nats-transport:4222
+    volumes:
+      - ./client-gateway:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev
+
+  analyze-orchestrate:
+    build: ./analysis-orchestrator
+    environment:
+      - PORT=3000
+      - NATS_SERVER=nats://nats-transport:4222
+    volumes:
+      - ./analysis-orchestrator:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev
+
+  metadata-service:
+    build: ./metadata-service
+    environment:
+      - PORT=3000
+      - NATS_SERVER=nats://nats-transport:4222
+    volumes:
+      - ./metadata-service:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev

@@ -1,5 +1,5 @@
 import knex, { Knex } from 'knex';
-import { DbConfig } from './interfaces';
+import { DbConfig } from '../interfaces';
 
 export class DatabaseConnectionManager {
   private _connection: null | Knex = null;

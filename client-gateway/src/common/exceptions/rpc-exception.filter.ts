@@ -6,8 +6,6 @@ export class RpcCustomExceptionFilter
   implements RpcExceptionFilter<RpcException>
 {
   catch(exception: RpcException, host: ArgumentsHost) {
-    console.log('entra aqui');
-    
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
 

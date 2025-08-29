@@ -5,15 +5,13 @@ import * as joi from 'joi';
 
 interface EnvVars {
   PORT: number;
-  ANALYZE_ORCHESTRATOR_SERVICE_HOST: string;
-  ANALYZE_ORCHESTRATOR_SERVICE_PORT: number;
+  NATS_SERVER: string;
 }
 
 const envSchema = joi
   .object({
     PORT: joi.number().required(),
-    ANALYZE_ORCHESTRATOR_SERVICE_HOST: joi.string().required(),
-    ANALYZE_ORCHESTRATOR_SERVICE_PORT: joi.number().required(),
+    NATS_SERVER: joi.string().required(),
   })
   .unknown(true);
 
@@ -28,6 +26,5 @@ const envVars: EnvVars = value;
 
 export const env = {
   port: envVars.PORT,
-  analyzeOrchestratorServiceHost: envVars.ANALYZE_ORCHESTRATOR_SERVICE_HOST,
-  analyzeOrchestratorServicePort: envVars.ANALYZE_ORCHESTRATOR_SERVICE_PORT,
+  nats_server: envVars.NATS_SERVER,
 };

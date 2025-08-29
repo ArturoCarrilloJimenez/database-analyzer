@@ -1,24 +1,22 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ConfigDatabase } from './dto';
-import { SERVICES } from 'src/config';
+import { NATS_SERVICE } from 'src/config';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 
 @Controller()
 export class AnalysisOrchestratorController {
   constructor(
-    @Inject(SERVICES['ANALYZE_ORCHESTRATOR_SERVICE'])
-    private readonly analyzeOrchestratorClient: ClientProxy,
+    @Inject(NATS_SERVICE)
+    private readonly natsService: ClientProxy,
   ) {}
 
   @Post('analyze')
   async create(@Body() configDatabase: ConfigDatabase) {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return await firstValueFrom(
-        this.analyzeOrchestratorClient.send(
-          { cmd: 'databaseAnalyze' },
-          configDatabase,
-        ),
+        this.natsService.send({ cmd: 'databaseAnalyze' }, configDatabase),
       );
     } catch (error) {
       throw new RpcException(error);

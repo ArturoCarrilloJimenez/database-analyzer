@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { MetadataService } from './services/metadata.service';
+import { MetadataService, StructureMetadataService } from './services/';
 import { MetadataController } from './metadata.controller';
+import { NatsModule } from 'src/trasport/nats.module';
 
 @Module({
   controllers: [MetadataController],
-  providers: [MetadataService],
+  providers: [MetadataService, StructureMetadataService],
+  imports: [NatsModule],
 })
 export class MetadataModule {}

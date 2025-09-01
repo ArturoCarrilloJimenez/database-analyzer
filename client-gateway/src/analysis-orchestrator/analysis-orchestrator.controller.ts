@@ -1,8 +1,9 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ConfigDatabase } from './dto';
 import { NATS_SERVICE } from 'src/config';
-import { ClientProxy, RpcException } from '@nestjs/microservices';
+import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
+import { createRpcError } from 'src/helper';
 
 @Controller()
 export class AnalysisOrchestratorController {
@@ -16,10 +17,13 @@ export class AnalysisOrchestratorController {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return await firstValueFrom(
-        this.natsService.send({ cmd: 'databaseAnalyze' }, configDatabase),
+        this.natsService.send(
+          'orchestrator.getDatabaseAnalyze',
+          configDatabase,
+        ),
       );
     } catch (error) {
-      throw new RpcException(error);
+      throw createRpcError(error);
     }
   }
 }

@@ -1,14 +1,25 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigDatabase } from './dto';
-import { RpcException } from '@nestjs/microservices';
+import { ClientProxy } from '@nestjs/microservices';
+import { NATS_SERVICE } from 'src/config';
+import { firstValueFrom } from 'rxjs';
+import { createRpcError } from 'src/helper';
 
 @Injectable()
 export class DatabaseAnalysisService {
-  databaseAnalyze(configDataBase: ConfigDatabase) {
-    return configDataBase.name;
-    throw new RpcException({
-      status: 401,
-      message: configDataBase.name,
-    });
+  constructor(
+    @Inject(NATS_SERVICE)
+    private readonly natsService: ClientProxy,
+  ) {}
+
+  async databaseAnalyze(configDataBase: ConfigDatabase) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      return await firstValueFrom(
+        this.natsService.send('metadata.getAllMetadata', configDataBase),
+      );
+    } catch (error) {
+      throw createRpcError(error);
+    }
   }
 }

@@ -9,7 +9,7 @@ export class DatabaseAnalysisController {
     private readonly databaseAnalysisService: DatabaseAnalysisService,
   ) {}
 
-  @EventPattern({ cmd: 'databaseAnalyze' })
+  @EventPattern('orchestrator.getDatabaseAnalyze')
   databaseAnalyze(@Payload() configDataBase: ConfigDatabase) {
     return this.databaseAnalysisService.databaseAnalyze(configDataBase);
   }

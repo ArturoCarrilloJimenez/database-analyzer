@@ -9,7 +9,7 @@ services:
   api-gateway:
     build: ./client-gateway
     ports:
-      - "3000:3000"
+      - "${CLIENT_PORT}:3000"
     environment:
       - PORT=3000
       - NATS_SERVER=nats://nats-transport:4222

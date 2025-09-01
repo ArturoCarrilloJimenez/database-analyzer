@@ -9,21 +9,11 @@ export class RpcCustomExceptionFilter
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
 
-    const rcpError = exception.getError();
+    const error = exception.getError() as { status?: number; message: string };
 
-    if (
-      typeof rcpError === 'object' &&
-      'status' in rcpError &&
-      typeof rcpError.status === 'number' &&
-      'message' in rcpError
-    ) {
-      const status = isNaN(rcpError.status) ? 400 : rcpError.status;
-      return response.status(status).json(rcpError);
-    }
-
-    response.status(400).json({
-      status: 400,
-      message: rcpError,
+    return response.status(error.status || 400).json({
+      status: error.status || 400,
+      message: error.message || 'Unknown error',
     });
   }
 }

@@ -1,5 +1,6 @@
 import knex, { Knex } from 'knex';
 import { DbConfig } from '../interfaces';
+import { createRpcError } from 'src/helper';
 
 export class DatabaseConnectionManager {
   private _connection: null | Knex = null;
@@ -8,7 +9,14 @@ export class DatabaseConnectionManager {
     if (config) this.connect(config);
   }
 
-  public get getClient(): null | Knex {
+  public get getClient(): Knex {
+    if (!this._connection) {
+      throw createRpcError({
+        status: '404',
+        message: 'Database not connected',
+      });
+    }
+
     return this._connection;
   }
 

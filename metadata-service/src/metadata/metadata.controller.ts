@@ -1,14 +1,14 @@
 import { Controller } from '@nestjs/common';
-import { MetadataService } from './services/metadata.service';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { MetadataService } from './services/';
+import { EventPattern, Payload } from '@nestjs/microservices';
 import { ConfigDatabase } from './dto';
 
 @Controller()
 export class MetadataController {
   constructor(private readonly metadataService: MetadataService) {}
 
-  @MessagePattern({ cmd: 'getAllMetadata' })
+  @EventPattern('metadata.getAllMetadata')
   getAllMetadata(@Payload() configDataBase: ConfigDatabase) {
-    this.metadataService.getAllMetadata(configDataBase);
+    return this.metadataService.getAllMetadata(configDataBase);
   }
 }

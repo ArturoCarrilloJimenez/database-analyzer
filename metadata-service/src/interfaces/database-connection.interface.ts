@@ -1,5 +1,5 @@
 export interface DbConfig {
-  client: 'pg' | 'mysql'; // Tipo de base de datos
+  client: 'pg' | 'mysql2'; // Tipo de base de datos
   host: string; // IP o dominio, ej: 'localhost' o 'db.example.com'
   port?: number; // Puerto opcional, ej: 5432 o 3306
   user: string; // Usuario

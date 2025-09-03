@@ -11,8 +11,10 @@ import {
 
 export class ConfigDatabase {
   @ApiProperty()
-  @IsIn(['pg', 'mysql'], { message: 'Client must be either "pg" or "mysql".' })
-  client: 'pg' | 'mysql';
+  @IsIn(['pg', 'mysql2'], {
+    message: 'Client must be either "pg" or "mysql2".',
+  })
+  client: 'pg' | 'mysql2';
 
   @ApiProperty()
   @IsString({ message: 'Host must be a valid string.' })

@@ -1,0 +1,52 @@
+[
+  {
+    "client": "pg",
+    "host": "hh-pgsql-public.ebi.ac.uk",
+    "port": 5432,
+    "user": "reader",
+    "password": "NWDMCE5xdipIjRrp",
+    "database": "pfmegrnargs",
+    "ssl": false,
+    "sslOptions": {}
+  },
+  {
+    "client": "mysql2",
+    "host": "relational-data.org",
+    "port": 3306,
+    "user": "sakila_user",
+    "password": "sakila_pass",
+    "database": "sakila",
+    "ssl": false,
+    "sslOptions": {}
+  },
+  {
+    "client": "pg",
+    "host": "pg.chinookdatabase.com",
+    "port": 5432,
+    "user": "chinook_reader",
+    "password": "chinook_pass",
+    "database": "chinook",
+    "ssl": true,
+    "sslOptions": {}
+  },
+  {
+    "client": "mysql2",
+    "host": "dev.mysql.com",
+    "port": 3306,
+    "user": "employee_reader",
+    "password": "employee_pass",
+    "database": "employees",
+    "ssl": false,
+    "sslOptions": {}
+  },
+  {
+    "client": "pg",
+    "host": "northwind-postgres-public.ebi.ac.uk",
+    "port": 5432,
+    "user": "northwind_reader",
+    "password": "northwind_pass",
+    "database": "northwind",
+    "ssl": true,
+    "sslOptions": {}
+  }
+]

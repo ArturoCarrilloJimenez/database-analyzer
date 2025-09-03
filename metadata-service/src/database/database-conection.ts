@@ -9,7 +9,7 @@ export class DatabaseConnectionManager {
     if (config) this.connect(config);
   }
 
-  public get getClient(): Knex {
+  public get getConnection(): Knex {
     if (!this._connection) {
       throw createRpcError({
         status: '404',
@@ -33,9 +33,10 @@ export class DatabaseConnectionManager {
         user: config.user,
         password: config.password,
         database: config.database,
-        ssl: config.ssl,
+        ssl: config.ssl ?? false,
+        connectTimeout: 30000,
       },
-      pool: config.pool,
+      pool: config.pool ?? { min: 2, max: 10 },
     });
   }
 

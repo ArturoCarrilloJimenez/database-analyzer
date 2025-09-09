@@ -8,5 +8,4 @@ export interface InformationSchema {
   has_triggers?: boolean;
   total_size?: number | null;
   comment?: string | null;
-  restricted?: boolean;
 }

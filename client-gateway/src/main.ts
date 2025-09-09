@@ -35,7 +35,7 @@ async function bootstrap() {
     .setVersion('0.1')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
+  SwaggerModule.setup('api/v1/doc', app, documentFactory);
 
   await app.listen(env.port);
   logger.log('App running in port ' + env.port);

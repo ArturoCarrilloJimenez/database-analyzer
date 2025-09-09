@@ -54,7 +54,7 @@ Database Analyzer analiza:
 
 <center>
 
-![Diagrama de Arquitectura](./images\estructura_de_microservicios.png)
+![Diagrama de Arquitectura](./images/estructura_de_microservicios.png)
 
 </center>
 

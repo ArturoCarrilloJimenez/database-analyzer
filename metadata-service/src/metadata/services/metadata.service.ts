@@ -1,16 +1,26 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigDatabase } from '../dto';
-import { DatabaseConnectionManager } from 'src/database/database-conection';
-import { StructureMetadataService } from './structure.metadata.service';
 import { createRpcError } from 'src/helper';
+import { MySQLMetadataService } from '../abstract -factory/mysql-metadata/services';
+import { DatabaseConnectionManager } from 'src/database/database-conection';
+import { AbstractMetadataService } from '../abstract';
+import { PostgreSQLMetadataService } from '../abstract -factory/postgresql-metadata/services';
 
 @Injectable()
 export class MetadataService {
   logger = new Logger('MetadataService');
 
+  engines: Record<string, AbstractMetadataService>;
+
   constructor(
-    private readonly structureMetadataService: StructureMetadataService,
-  ) {}
+    private readonly mysqlService: MySQLMetadataService,
+    private readonly postgresService: PostgreSQLMetadataService,
+  ) {
+    this.engines = {
+      mysql2: this.mysqlService,
+      pg: this.postgresService,
+    };
+  }
 
   async getAllMetadata(configDatabase: ConfigDatabase) {
     try {
@@ -23,7 +33,7 @@ export class MetadataService {
         });
       }
 
-      return await this.structureMetadataService.getStructureMetadata(
+      return await this.engines[configDatabase.client].getAllMetadata(
         connectionManager.getConnection,
       );
     } catch (error) {

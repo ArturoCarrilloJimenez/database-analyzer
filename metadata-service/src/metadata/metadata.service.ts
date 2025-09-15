@@ -1,10 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigDatabase } from '../dto';
+import { ConfigDatabase } from './dto';
 import { createRpcError } from 'src/helper';
-import { MySQLMetadataService } from '../abstract -factory/mysql-metadata/services';
+import { MySQLMetadataService } from './client/mysql/services';
 import { DatabaseConnectionManager } from 'src/database/database-conection';
-import { AbstractMetadataService } from '../abstract';
-import { PostgreSQLMetadataService } from '../abstract -factory/postgresql-metadata/services';
+import { AbstractMetadataService } from './client/abstract';
+import { PostgreSQLMetadataService } from './client/postgresql/services';
 
 @Injectable()
 export class MetadataService {

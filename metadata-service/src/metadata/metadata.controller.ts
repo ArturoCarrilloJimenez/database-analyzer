@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
-import { MetadataService } from './services/';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import { ConfigDatabase } from './dto';
+import { MetadataService } from './metadata.service';
 
 @Controller()
 export class MetadataController {

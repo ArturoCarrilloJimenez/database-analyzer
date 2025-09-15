@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { MySQLStructureMetadataService } from './structure.metadata.service';
 import { createRpcError } from 'src/helper';
 import { Knex } from 'knex';
-import { AbstractMetadataService } from 'src/metadata/abstract/metadata-service.interface';
+import { AbstractMetadataService } from 'src/metadata/client/abstract/metadata-service.interface';
 
 @Injectable()
 export class MySQLMetadataService extends AbstractMetadataService {

@@ -18,6 +18,7 @@ export class MySQLMetadataService extends AbstractMetadataService {
     try {
       return await this.structureMetadataService.getStructureMetadata(
         connection,
+        this.database,
       );
     } catch (error) {
       this.logger.error('Error getting all metadata', error);

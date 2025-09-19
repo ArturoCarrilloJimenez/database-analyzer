@@ -33,9 +33,9 @@ export class MetadataService {
         });
       }
 
-      return await this.engines[configDatabase.client].getAllMetadata(
-        connectionManager.getConnection,
-      );
+      return await this.engines[configDatabase.client]
+        .init(configDatabase.database)
+        .getAllMetadata(connectionManager.getConnection);
     } catch (error) {
       this.logger.error('Error getting all metadata', error);
       throw createRpcError(error);

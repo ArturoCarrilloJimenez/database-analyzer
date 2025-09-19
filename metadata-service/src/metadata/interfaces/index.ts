@@ -1,2 +1,6 @@
-export { InformationSchema } from './information-schema.interface';
-export { AbstractStructureService as IStructureService } from '../client/abstract/structure-metadata-service.interface';
+export {
+  BasicStructureSchema,
+  BasicTableQuery,
+  HasIndexQuery,
+  HasTriggerQuery,
+} from './structute-schema.interface';

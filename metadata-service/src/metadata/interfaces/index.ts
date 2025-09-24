@@ -1,6 +1,5 @@
 export {
-  BasicStructureSchema,
   BasicTableQuery,
-  HasIndexQuery,
-  HasTriggerQuery,
+  BasicColumQuery,
+  BasicColumnSchema,
 } from './structute-schema.interface';

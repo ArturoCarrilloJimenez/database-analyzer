@@ -1,13 +1,3 @@
-export interface BasicStructureSchema {
-  tableName: string;
-  tableType: 'BASE TABLE' | 'VIEW';
-  engine?: string;
-  hasIndexes: boolean;
-  hasTriggers: boolean;
-  totalSize: number;
-  comment: string;
-}
-
 export interface BasicTableQuery {
   tableName: string;
   tableType: 'BASE TABLE' | 'VIEW';
@@ -16,15 +6,8 @@ export interface BasicTableQuery {
   comment: string;
 }
 
-export interface HasIndexQuery {
-  tableName: string;
-}
-
-export interface HasTriggerQuery {
-  tableName: string;
-}
-
 export interface BasicColumnSchema {
+  tableName: string;
   name: string;
   type: string;
   typeKey?: string;
@@ -40,6 +23,7 @@ export interface BasicColumnSchema {
 }
 
 export interface BasicColumQuery {
+  tableName: string;
   name: string;
   type: string;
   typeKey: string;

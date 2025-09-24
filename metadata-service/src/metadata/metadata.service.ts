@@ -4,7 +4,6 @@ import { createRpcError } from 'src/helper';
 import { MySQLMetadataService } from './client/mysql/services';
 import { DatabaseConnectionManager } from 'src/database/database-conection';
 import { AbstractMetadataService } from './client/abstract';
-import { PostgreSQLMetadataService } from './client/postgresql/services';
 
 @Injectable()
 export class MetadataService {
@@ -12,13 +11,10 @@ export class MetadataService {
 
   engines: Record<string, AbstractMetadataService>;
 
-  constructor(
-    private readonly mysqlService: MySQLMetadataService,
-    private readonly postgresService: PostgreSQLMetadataService,
-  ) {
+  // TODO termira posgre
+  constructor(private readonly mysqlService: MySQLMetadataService) {
     this.engines = {
       mysql2: this.mysqlService,
-      pg: this.postgresService,
     };
   }
 

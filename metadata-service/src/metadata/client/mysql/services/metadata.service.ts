@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { MySQLColumnsMetadataService, MySQLTablesMetadataService } from './';
+import { MySQLColumnsMetadataService, MySQLTablesMetadataService } from '.';
 import { createRpcError } from 'src/helper';
 import { Knex } from 'knex';
 import { AbstractMetadataService } from 'src/metadata/client/abstract/metadata-service.interface';

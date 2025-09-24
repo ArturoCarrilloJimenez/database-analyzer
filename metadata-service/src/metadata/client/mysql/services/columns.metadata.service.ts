@@ -6,7 +6,7 @@ import { AbstractColumnService } from '../../abstract';
 
 @Injectable()
 export class MySQLColumnsMetadataService extends AbstractColumnService {
-  private logger = new Logger('MySQLStructureMetadataService');
+  private logger = new Logger('MySQLColumnsMetadataService');
 
   async getTableColumns(connectionDb: Knex, database: string) {
     try {

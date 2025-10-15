@@ -31,13 +31,13 @@ export class MySQLMetadataService extends AbstractMetadataService {
 
       const result: object[] = baseTables.map((t) => ({
         ...t,
-        comment: baseColumns
+        columns: baseColumns
           .filter((c) => {
             return c.tableName == t.tableName;
           })
           .map((c) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { tableName, ...res } = c;
-
             return {
               ...res,
             };

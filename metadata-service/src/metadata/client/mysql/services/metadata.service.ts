@@ -1,5 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { MySQLColumnsMetadataService, MySQLTablesMetadataService } from '.';
+import {
+  MySQLColumnsMetadataService,
+  MySQLIndexMetadataService,
+  MySQLTablesMetadataService,
+} from '.';
 import { createRpcError } from 'src/helper';
 import { Knex } from 'knex';
 import { AbstractMetadataService } from 'src/metadata/client/abstract/metadata-service.interface';
@@ -11,6 +15,7 @@ export class MySQLMetadataService extends AbstractMetadataService {
   constructor(
     private readonly columnsMetadataService: MySQLColumnsMetadataService,
     private readonly tableMetadataService: MySQLTablesMetadataService,
+    private readonly indexMetadataService: MySQLIndexMetadataService,
   ) {
     super();
   }
@@ -27,7 +32,16 @@ export class MySQLMetadataService extends AbstractMetadataService {
         this.database,
       );
 
-      const [baseTables, baseColumns] = await Promise.all([tables, columns]);
+      const index = this.indexMetadataService.getTableIndex(
+        connection,
+        this.database,
+      );
+
+      const [baseTables, baseColumns, baseIndex] = await Promise.all([
+        tables,
+        columns,
+        index,
+      ]);
 
       const result: object[] = baseTables.map((t) => ({
         ...t,
@@ -40,6 +54,15 @@ export class MySQLMetadataService extends AbstractMetadataService {
             const { tableName, ...res } = c;
             return {
               ...res,
+              index: baseIndex
+                .filter((i) => {
+                  return i.name == res.name;
+                })
+                .map((i) => {
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  const { name, tableName, ...res } = i;
+                  return res;
+                }),
             };
           }),
       }));

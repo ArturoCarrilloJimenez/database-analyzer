@@ -37,3 +37,8 @@ export interface BasicColumQuery {
   collection: string | null;
   comment: string;
 }
+
+export interface BasicIndexQuery {
+  tableName: string;
+  name: string;
+}

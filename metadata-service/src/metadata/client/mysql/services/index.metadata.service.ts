@@ -16,7 +16,7 @@ export class MySQLIndexMetadataService extends AbstractIndexService {
       const table = connectionDb('information_schema.statistics')
         .select<
           BasicIndexQuery[]
-        >(['TABLE_NAME as tableName', 'COLUMN_NAME as name', 'INDEX_NAME as indexName', 'NON_UNIQUE as unique', 'CARDINALITY as cardinality', 'INDEX_TYPE as type', 'SEQ_IN_INDEX as seqIndex'])
+        >(['TABLE_NAME as tableName', 'COLUMN_NAME as name', 'INDEX_NAME as indexName', 'NON_UNIQUE as unique', 'INDEX_TYPE as type', 'SEQ_IN_INDEX as seqIndex'])
         .where('TABLE_SCHEMA', database);
 
       return table;

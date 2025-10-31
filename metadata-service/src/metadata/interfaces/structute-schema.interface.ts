@@ -3,6 +3,7 @@ export interface BasicTableQuery {
   tableType: 'BASE TABLE' | 'VIEW';
   engine?: string;
   totalSize: number;
+  rows: number;
   comment: string;
 }
 
@@ -39,6 +40,25 @@ export interface BasicColumQuery {
 }
 
 export interface BasicIndexQuery {
+  tableName: string;
+  name: string;
+  indexName: string;
+  unique: number;
+  type: string;
+  seqIndex: number;
+}
+
+export interface BasicForeignKeyQuery {
+  tableName: string;
+  name: string;
+  restrictName: string;
+  tableReference: string;
+  columnsReference: string;
+  onDelete: string;
+  onUpdate: string;
+}
+
+export interface BasicTriggerQuery {
   tableName: string;
   name: string;
 }

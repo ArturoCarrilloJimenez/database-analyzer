@@ -18,6 +18,7 @@ export class MySQLTablesMetadataService extends AbstractTableService {
           'TABLE_COMMENT AS comment',
           'ENGINE AS engine',
           connectionDb.raw('(DATA_LENGTH + INDEX_LENGTH) AS totalSize'),
+          'TABLE_ROWS as rows',
         ])
         .where('TABLE_SCHEMA', database);
 

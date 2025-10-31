@@ -11,7 +11,6 @@ export class MetadataService {
 
   engines: Record<string, AbstractMetadataService>;
 
-  // TODO termira posgre
   constructor(private readonly mysqlService: MySQLMetadataService) {
     this.engines = {
       mysql2: this.mysqlService,
@@ -29,9 +28,15 @@ export class MetadataService {
         });
       }
 
-      return await this.engines[configDatabase.client]
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment
+      const result = await this.engines[configDatabase.client]
         .init(configDatabase.database)
         .getAllMetadata(connectionManager.getConnection);
+
+      await connectionManager.remove();
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      return result;
     } catch (error) {
       this.logger.error('Error getting all metadata', error);
       throw createRpcError(error);

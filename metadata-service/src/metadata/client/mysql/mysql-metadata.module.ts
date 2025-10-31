@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import {
   MySQLColumnsMetadataService,
+  MySQLForeignKeyMetadataService,
   MySQLIndexMetadataService,
   MySQLMetadataService,
   MySQLTablesMetadataService,
+  MySQLTriggerMetadataService,
 } from './services';
 
 @Module({
@@ -12,6 +14,8 @@ import {
     MySQLTablesMetadataService,
     MySQLColumnsMetadataService,
     MySQLIndexMetadataService,
+    MySQLForeignKeyMetadataService,
+    MySQLTriggerMetadataService,
   ],
   exports: [MySQLMetadataService],
 })
